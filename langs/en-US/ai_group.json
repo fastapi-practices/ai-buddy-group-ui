@@ -1,0 +1,62 @@
+{
+  "menu": "AI Group",
+  "action": {
+    "add": "New Group",
+    "config": "Configure",
+    "configUser": "Configure Users"
+  },
+  "field": {
+    "name": "Group Name",
+    "namePlaceholder": "Please enter a group name",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe the scope of this group",
+    "userCount": "Users"
+  },
+  "modal": {
+    "addTitle": "New Group"
+  },
+  "resource": {
+    "provider": "Providers",
+    "model": "Models",
+    "mcp": "MCP"
+  },
+  "visibility": {
+    "all": "All Visible",
+    "none": "None Visible",
+    "specified": "Specified",
+    "allTag": "All",
+    "specifiedTag": "{0} selected"
+  },
+  "drawer": {
+    "title": "Resource Configuration",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "panel": {
+    "searchPlaceholder": "Search {0}",
+    "selectFiltered": "Select current results",
+    "addable": "{0} addable",
+    "selected": "{0} selected",
+    "added": "Added",
+    "available": "Addable",
+    "noMatch": "No matching resources",
+    "allVisibleHint": "Set to \"All Visible\". Members can access all global resources of this type.",
+    "noneVisibleHint": "Set to \"None Visible\". Members cannot access resources of this type.",
+    "emptyProvider": "No providers yet. Please add providers in the AI plugin first.",
+    "emptyModel": "No models yet. Please sync or add models in the AI plugin first.",
+    "emptyMcp": "No MCP yet. Please add MCP in the AI plugin first."
+  },
+  "message": {
+    "selectGroupFirst": "Please select a group to configure"
+  },
+  "userDrawer": {
+    "title": "User Configuration",
+    "save": "Save Users",
+    "cancel": "Cancel",
+    "searchPlaceholder": "Search username",
+    "selected": "{0} selected",
+    "bound": "Bound",
+    "available": "Bindable",
+    "empty": "No matching users"
+  }
+}

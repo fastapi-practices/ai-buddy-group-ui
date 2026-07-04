@@ -1,0 +1,62 @@
+{
+  "menu": "AI 分组",
+  "action": {
+    "add": "新增分组",
+    "config": "配置资源",
+    "configUser": "配置用户"
+  },
+  "field": {
+    "name": "分组名称",
+    "namePlaceholder": "请输入分组名称",
+    "description": "分组描述",
+    "descriptionPlaceholder": "描述这个分组的使用范围",
+    "userCount": "人数"
+  },
+  "modal": {
+    "addTitle": "新增分组"
+  },
+  "resource": {
+    "provider": "服务商",
+    "model": "模型",
+    "mcp": "MCP"
+  },
+  "visibility": {
+    "all": "全部可见",
+    "none": "全部不可见",
+    "specified": "指定可见",
+    "allTag": "全部",
+    "specifiedTag": "指定 {0} 项"
+  },
+  "drawer": {
+    "title": "资源配置",
+    "save": "保存资源配置",
+    "cancel": "取消"
+  },
+  "panel": {
+    "searchPlaceholder": "搜索{0}",
+    "selectFiltered": "选择当前筛选结果",
+    "addable": "可添加 {0} 个",
+    "selected": "已选择 {0} 个",
+    "added": "已添加",
+    "available": "可添加",
+    "noMatch": "没有匹配的资源",
+    "allVisibleHint": "当前为「全部可见」，组成员可访问所有此类型的全局资源",
+    "noneVisibleHint": "当前为「全部不可见」，组成员不能访问此类型资源",
+    "emptyProvider": "暂无服务商,请先在 AI 插件中维护服务商",
+    "emptyModel": "暂无模型,请先在 AI 插件中同步或新增模型",
+    "emptyMcp": "暂无 MCP,请先在 AI 插件中维护 MCP"
+  },
+  "message": {
+    "selectGroupFirst": "请选择需要配置资源的分组"
+  },
+  "userDrawer": {
+    "title": "用户配置",
+    "save": "保存用户配置",
+    "cancel": "取消",
+    "searchPlaceholder": "搜索用户名",
+    "selected": "已选择 {0} 个",
+    "bound": "已绑定",
+    "available": "可绑定",
+    "empty": "没有匹配的用户"
+  }
+}
