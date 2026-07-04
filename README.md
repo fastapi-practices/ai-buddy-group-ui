@@ -1,4 +1,4 @@
-# AI Group
+# AI Group UI
 
 用于在前端管理 AI 分组、分组用户绑定和 AI 资源可见范围
 
