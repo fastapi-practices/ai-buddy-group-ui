@@ -5,3 +5,4 @@ version = '0.0.1'
 description = 'fba AI Buddy Group 插件的前端实现'
 author = 'wu-clan'
 tags = ['ai']
+depends_on = ['ai-buddy']
