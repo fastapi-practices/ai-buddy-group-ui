@@ -155,25 +155,25 @@ const currentGroup = ref<AIGroupDetailResult | AIGroupResult>();
 
 const resourceSections = computed<ResourceSection[]>(() => [
   {
-    emptyText: $t('ai_group.panel.emptyProvider'),
+    emptyText: $t('ai-buddy-group.panel.emptyProvider'),
     icon: 'icon-[lucide--server] -mb-1 size-5',
     idsKey: 'provider_ids',
     options: providerOptions.value,
-    title: $t('ai_group.resource.provider'),
+    title: $t('ai-buddy-group.resource.provider'),
   },
   {
-    emptyText: $t('ai_group.panel.emptyModel'),
+    emptyText: $t('ai-buddy-group.panel.emptyModel'),
     icon: 'icon-[lucide--brain] -mb-1 size-5',
     idsKey: 'model_ids',
     options: modelOptions.value,
-    title: $t('ai_group.resource.model'),
+    title: $t('ai-buddy-group.resource.model'),
   },
   {
-    emptyText: $t('ai_group.panel.emptyMcp'),
+    emptyText: $t('ai-buddy-group.panel.emptyMcp'),
     icon: 'icon-[lucide--terminal-square] -mb-1 size-5',
     idsKey: 'mcp_ids',
     options: mcpOptions.value,
-    title: $t('ai_group.resource.mcp'),
+    title: $t('ai-buddy-group.resource.mcp'),
   },
 ]);
 
@@ -244,7 +244,7 @@ function normalizeResourceFormValues(
 
 function validateResourceForm() {
   if (!currentGroup.value?.id) {
-    message.warning($t('ai_group.message.selectGroupFirst'));
+    message.warning($t('ai-buddy-group.message.selectGroupFirst'));
     return false;
   }
   return true;
@@ -416,7 +416,7 @@ async function openUserDrawer(row: AIGroupResult) {
   userDrawerApi
     .setData(row)
     .setState({
-      title: $t('ai_group.userDrawer.title'),
+      title: $t('ai-buddy-group.userDrawer.title'),
     })
     .open();
 }
@@ -461,7 +461,7 @@ async function openConfigDrawer(row: AIGroupResult) {
   drawerApi
     .setData(detail)
     .setState({
-      title: $t('ai_group.drawer.title'),
+      title: $t('ai-buddy-group.drawer.title'),
     })
     .open();
 }
@@ -531,14 +531,14 @@ const [Modal, modalApi] = useVbenModal({
 });
 
 const [Drawer, drawerApi] = useVbenDrawer({
-  cancelText: $t('ai_group.drawer.cancel'),
+  cancelText: $t('ai-buddy-group.drawer.cancel'),
   class: 'ai-group-resource-drawer',
-  confirmText: $t('ai_group.drawer.save'),
+  confirmText: $t('ai-buddy-group.drawer.save'),
   contentClass: 'h-full overflow-hidden p-0',
   destroyOnClose: true,
   footerClass: 'px-5 py-3',
   header: true,
-  title: $t('ai_group.drawer.title'),
+  title: $t('ai-buddy-group.drawer.title'),
   async onConfirm() {
     if (!validateResourceForm()) {
       return;
@@ -562,17 +562,17 @@ const [Drawer, drawerApi] = useVbenDrawer({
 });
 
 const [UserDrawer, userDrawerApi] = useVbenDrawer({
-  cancelText: $t('ai_group.userDrawer.cancel'),
+  cancelText: $t('ai-buddy-group.userDrawer.cancel'),
   class: 'ai-group-user-drawer',
-  confirmText: $t('ai_group.userDrawer.save'),
+  confirmText: $t('ai-buddy-group.userDrawer.save'),
   contentClass: 'h-full overflow-hidden p-0',
   destroyOnClose: true,
   footerClass: 'px-5 py-3',
   header: true,
-  title: $t('ai_group.userDrawer.title'),
+  title: $t('ai-buddy-group.userDrawer.title'),
   async onConfirm() {
     if (!currentGroup.value?.id) {
-      message.warning($t('ai_group.message.selectGroupFirst'));
+      message.warning($t('ai-buddy-group.message.selectGroupFirst'));
       return;
     }
 
@@ -619,14 +619,14 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
       <template #toolbar-actions>
         <VbenButton @click="() => modalApi.setData(null).open()">
           <MaterialSymbolsAdd class="size-5" />
-          {{ $t('ai_group.action.add') }}
+          {{ $t('ai-buddy-group.action.add') }}
         </VbenButton>
       </template>
     </Grid>
 
     <Modal
       content-class="px-4 py-4 md:px-5 md:py-5"
-      :title="$t('ai_group.modal.addTitle')"
+      :title="$t('ai-buddy-group.modal.addTitle')"
     >
       <Form />
     </Modal>
@@ -667,14 +667,14 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                     v-if="getSectionScope(section) === 0"
                     class="absolute inset-0 flex items-center justify-center text-center text-sm font-medium text-muted-foreground"
                   >
-                    {{ $t('ai_group.panel.allVisibleHint') }}
+                    {{ $t('ai-buddy-group.panel.allVisibleHint') }}
                   </div>
 
                   <div
                     v-else-if="getSectionScope(section) === 1"
                     class="absolute inset-0 flex items-center justify-center text-center text-sm font-medium text-muted-foreground"
                   >
-                    {{ $t('ai_group.panel.noneVisibleHint') }}
+                    {{ $t('ai-buddy-group.panel.noneVisibleHint') }}
                   </div>
 
                   <template v-else>
@@ -685,7 +685,7 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                           allow-clear
                           class="min-w-0 flex-1"
                           :placeholder="
-                            $t('ai_group.panel.searchPlaceholder', [
+                            $t('ai-buddy-group.panel.searchPlaceholder', [
                               section.title,
                             ])
                           "
@@ -699,18 +699,18 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                               (checked) => updateAllFiltered(section, checked)
                             "
                           >
-                            {{ $t('ai_group.panel.selectFiltered') }}
+                            {{ $t('ai-buddy-group.panel.selectFiltered') }}
                           </a-checkbox>
                           <span>
                             {{
-                              $t('ai_group.panel.addable', [
+                              $t('ai-buddy-group.panel.addable', [
                                 getAddableCount(section),
                               ])
                             }}
                           </span>
                           <span>
                             {{
-                              $t('ai_group.panel.selected', [
+                              $t('ai-buddy-group.panel.selected', [
                                 getSectionIds(section).length,
                               ])
                             }}
@@ -737,7 +737,7 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                           v-else-if="getFilteredOptions(section).length === 0"
                           class="flex h-full min-h-[360px] items-center justify-center"
                         >
-                          <a-empty :description="$t('ai_group.panel.noMatch')" />
+                          <a-empty :description="$t('ai-buddy-group.panel.noMatch')" />
                         </div>
 
                         <a-checkbox-group
@@ -777,10 +777,10 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                                       )
                                     "
                                   >
-                                    {{ $t('ai_group.panel.added') }}
+                                    {{ $t('ai-buddy-group.panel.added') }}
                                   </a-tag>
                                   <a-tag v-else color="blue">
-                                    {{ $t('ai_group.panel.available') }}
+                                    {{ $t('ai-buddy-group.panel.available') }}
                                   </a-tag>
                                 </div>
                               </div>
@@ -806,13 +806,13 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
             allow-clear
             class="min-w-0 flex-1"
             :loading="usersLoading"
-            :placeholder="$t('ai_group.userDrawer.searchPlaceholder')"
+            :placeholder="$t('ai-buddy-group.userDrawer.searchPlaceholder')"
             @search="() => loadUserOptions(true)"
           />
           <div class="flex shrink-0 items-center gap-3 text-xs text-muted-foreground">
             <span>
               {{
-                $t('ai_group.userDrawer.selected', [selectedUserIds.length])
+                $t('ai-buddy-group.userDrawer.selected', [selectedUserIds.length])
               }}
             </span>
           </div>
@@ -830,7 +830,7 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
             v-else-if="userOptions.length === 0"
             class="flex h-full min-h-[360px] items-center justify-center"
           >
-            <a-empty :description="$t('ai_group.userDrawer.empty')" />
+            <a-empty :description="$t('ai-buddy-group.userDrawer.empty')" />
           </div>
 
           <a-checkbox-group
@@ -868,10 +868,10 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                   </a-checkbox>
                   <div class="flex shrink-0 items-center gap-2">
                     <a-tag v-if="selectedUserIds.includes(user.value)">
-                      {{ $t('ai_group.userDrawer.bound') }}
+                      {{ $t('ai-buddy-group.userDrawer.bound') }}
                     </a-tag>
                     <a-tag v-else color="blue">
-                      {{ $t('ai_group.userDrawer.available') }}
+                      {{ $t('ai-buddy-group.userDrawer.available') }}
                     </a-tag>
                   </div>
                 </div>

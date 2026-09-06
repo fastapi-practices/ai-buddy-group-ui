@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
     path: '/plugins/ai-buddy/group',
     component: () => import('../views/index.vue'),
     meta: {
-      title: $t('ai_group.menu'),
+      title: $t('ai-buddy-group.menu'),
       icon: 'ri:group-line',
     },
   },
