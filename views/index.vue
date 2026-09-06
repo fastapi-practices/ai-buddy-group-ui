@@ -30,7 +30,7 @@ import {
   getAllAIMcpApi,
   getAllAIModelApi,
   getAllAIProviderApi,
-} from '#/plugins/ai/api';
+} from '#/plugins/ai-buddy/api';
 
 import {
   bindAIGroupUserApi,
@@ -917,8 +917,8 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
 }
 
 .ai-group-resource-drawer .resource-config-tabs > .ant-tabs-nav::before {
-  bottom: 0;
   top: 0;
+  bottom: 0;
 }
 
 .ai-group-resource-drawer .resource-config-tabs > .ant-tabs-nav > .ant-tabs-nav-wrap {
@@ -926,8 +926,8 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
 }
 
 .ai-group-resource-drawer .resource-config-tabs > .ant-tabs-content-holder {
-  height: 100%;
   min-width: 0;
+  height: 100%;
 }
 
 .ai-group-resource-drawer .resource-config-tabs > .ant-tabs-content-holder > .ant-tabs-content,
