@@ -5,7 +5,7 @@ import { $t } from '#/locales';
 const routes: RouteRecordRaw[] = [
   {
     name: 'PluginAIGroup',
-    path: '/plugins/ai/group',
+    path: '/plugins/ai-buddy/group',
     component: () => import('../views/index.vue'),
     meta: {
       title: $t('ai_group.menu'),
