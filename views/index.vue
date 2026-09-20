@@ -610,10 +610,15 @@ const [Drawer, drawerApi] = useVbenDrawer({
       return;
     }
 
+    const groupId = currentGroup.value?.id;
+    if (!groupId) {
+      return;
+    }
+
     drawerApi.lock();
     try {
       const payload = normalizeResourceFormValues(formState);
-      await updateAIGroupResourceApi(currentGroup.value!.id!, payload);
+      await updateAIGroupResourceApi(groupId, payload);
       message.success($t('ui.actionMessage.operationSuccess'));
       await drawerApi.close();
       onRefresh();
