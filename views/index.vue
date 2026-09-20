@@ -27,9 +27,12 @@ import { useVbenForm } from '#/adapter/form';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { getSysUserListApi } from '#/api';
 import {
+  getAllAIExpertApi,
+  getAllAIKnowledgeBaseApi,
   getAllAIMcpApi,
   getAllAIModelApi,
   getAllAIProviderApi,
+  getAllAISkillApi,
 } from '#/plugins/ai-buddy/api';
 
 import {
@@ -50,9 +53,12 @@ import {
 } from './data';
 
 type ResourceIdsKey =
+  | 'expert_ids'
+  | 'knowledge_ids'
   | 'mcp_ids'
   | 'model_ids'
-  | 'provider_ids';
+  | 'provider_ids'
+  | 'skill_ids';
 
 interface SelectOption {
   label: string;
@@ -77,10 +83,13 @@ interface ResourceSection {
 }
 
 interface AIGroupFormValues extends AIGroupCreateParams {
+  expert_ids: AIGroupResourceIdList;
   id?: number;
+  knowledge_ids: AIGroupResourceIdList;
   mcp_ids: AIGroupResourceIdList;
   model_ids: AIGroupResourceIdList;
   provider_ids: AIGroupResourceIdList;
+  skill_ids: AIGroupResourceIdList;
 }
 
 const formOptions: VbenFormProps = {
@@ -129,17 +138,26 @@ const [Grid, gridApi] = useVbenVxeGrid({ formOptions, gridOptions });
 const providerOptions = ref<SelectOption[]>([]);
 const modelOptions = ref<SelectOption[]>([]);
 const mcpOptions = ref<SelectOption[]>([]);
+const expertOptions = ref<SelectOption[]>([]);
+const knowledgeOptions = ref<SelectOption[]>([]);
+const skillOptions = ref<SelectOption[]>([]);
 const resourcesLoading = ref(false);
 const activeResourceKey = ref<ResourceIdsKey>('provider_ids');
 const resourceKeywords = reactive<Record<ResourceIdsKey, string>>({
+  expert_ids: '',
+  knowledge_ids: '',
   mcp_ids: '',
   model_ids: '',
   provider_ids: '',
+  skill_ids: '',
 });
 const resourceScopes = reactive<Record<ResourceIdsKey, AIGroupResourceScopeType>>({
+  expert_ids: 0,
+  knowledge_ids: 0,
   mcp_ids: 0,
   model_ids: 0,
   provider_ids: 0,
+  skill_ids: 0,
 });
 const userKeyword = ref('');
 const userOptions = ref<UserSelectOption[]>([]);
@@ -175,6 +193,27 @@ const resourceSections = computed<ResourceSection[]>(() => [
     options: mcpOptions.value,
     title: $t('ai-buddy-group.resource.mcp'),
   },
+  {
+    emptyText: $t('ai-buddy-group.panel.emptyExpert'),
+    icon: 'icon-[lucide--star] -mb-1 size-5',
+    idsKey: 'expert_ids',
+    options: expertOptions.value,
+    title: $t('ai-buddy-group.resource.expert'),
+  },
+  {
+    emptyText: $t('ai-buddy-group.panel.emptyKnowledge'),
+    icon: 'icon-[lucide--book-open] -mb-1 size-5',
+    idsKey: 'knowledge_ids',
+    options: knowledgeOptions.value,
+    title: $t('ai-buddy-group.resource.knowledge'),
+  },
+  {
+    emptyText: $t('ai-buddy-group.panel.emptySkill'),
+    icon: 'icon-[lucide--puzzle] -mb-1 size-5',
+    idsKey: 'skill_ids',
+    options: skillOptions.value,
+    title: $t('ai-buddy-group.resource.skill'),
+  },
 ]);
 
 const resourceTabItems = computed(() =>
@@ -192,10 +231,13 @@ function onRefresh() {
 function buildEmptyFormValues(): AIGroupFormValues {
   return {
     description: undefined,
+    expert_ids: null,
+    knowledge_ids: null,
     mcp_ids: null,
     model_ids: null,
     name: '',
     provider_ids: null,
+    skill_ids: null,
   };
 }
 
@@ -217,6 +259,9 @@ function resetFormState(data?: AIGroupDetailResult) {
   resourceScopes.provider_ids = getScopeFromIds(formState.provider_ids);
   resourceScopes.model_ids = getScopeFromIds(formState.model_ids);
   resourceScopes.mcp_ids = getScopeFromIds(formState.mcp_ids);
+  resourceScopes.expert_ids = getScopeFromIds(formState.expert_ids);
+  resourceScopes.knowledge_ids = getScopeFromIds(formState.knowledge_ids);
+  resourceScopes.skill_ids = getScopeFromIds(formState.skill_ids);
   activeResourceKey.value = 'provider_ids';
 }
 
@@ -235,9 +280,12 @@ function normalizeResourceFormValues(
   };
 
   return {
+    expert_ids: normalizeSectionIds('expert_ids'),
+    knowledge_ids: normalizeSectionIds('knowledge_ids'),
     mcp_ids: normalizeSectionIds('mcp_ids'),
     model_ids: normalizeSectionIds('model_ids'),
     provider_ids: normalizeSectionIds('provider_ids'),
+    skill_ids: normalizeSectionIds('skill_ids'),
   };
 }
 
@@ -433,18 +481,34 @@ async function loadResourceOptions() {
       value: item.id,
     }));
 
-    const [modelGroups, mcps] = await Promise.all([
-      Promise.all(
-        providers.map((item) => getAllAIModelApi({ provider_id: item.id })),
-      ),
-      getAllAIMcpApi(),
-    ]);
+    const [modelGroups, mcps, experts, knowledgeBases, skills] =
+      await Promise.all([
+        Promise.all(
+          providers.map((item) => getAllAIModelApi({ provider_id: item.id })),
+        ),
+        getAllAIMcpApi(),
+        getAllAIExpertApi(),
+        getAllAIKnowledgeBaseApi(),
+        getAllAISkillApi(),
+      ]);
 
     modelOptions.value = modelGroups.flat().map((item) => ({
       label: `${providerNameMap.get(item.provider_id) ?? item.provider_id} · ${item.model_id}`,
       value: item.id,
     }));
     mcpOptions.value = mcps.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+    expertOptions.value = experts.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+    knowledgeOptions.value = knowledgeBases.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+    skillOptions.value = skills.map((item) => ({
       label: item.name,
       value: item.id,
     }));

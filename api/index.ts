@@ -19,9 +19,12 @@ export interface AIGroupUpdateParams {
 }
 
 export interface AIGroupResourceParams {
+  expert_ids?: AIGroupResourceIdList;
+  knowledge_ids?: AIGroupResourceIdList;
   mcp_ids?: AIGroupResourceIdList;
   model_ids?: AIGroupResourceIdList;
   provider_ids?: AIGroupResourceIdList;
+  skill_ids?: AIGroupResourceIdList;
 }
 
 export interface AIGroupQueryParams {

@@ -18,7 +18,10 @@
   "resource": {
     "provider": "Providers",
     "model": "Models",
-    "mcp": "MCP"
+    "mcp": "MCP",
+    "expert": "Experts",
+    "knowledge": "Knowledge Bases",
+    "skill": "Skills"
   },
   "visibility": {
     "all": "All Visible",
@@ -44,7 +47,10 @@
     "noneVisibleHint": "Set to \"None Visible\". Members cannot access resources of this type.",
     "emptyProvider": "No providers yet. Please add providers in the AI plugin first.",
     "emptyModel": "No models yet. Please sync or add models in the AI plugin first.",
-    "emptyMcp": "No MCP yet. Please add MCP in the AI plugin first."
+    "emptyMcp": "No MCP yet. Please add MCP in the AI plugin first.",
+    "emptyExpert": "No experts yet. Please add experts in AI Buddy first.",
+    "emptyKnowledge": "No knowledge bases yet. Please add knowledge bases in AI Buddy first.",
+    "emptySkill": "No skills yet. Please add skills in AI Buddy first."
   },
   "message": {
     "selectGroupFirst": "Please select a group to configure"

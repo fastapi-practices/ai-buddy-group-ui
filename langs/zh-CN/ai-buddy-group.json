@@ -18,7 +18,10 @@
   "resource": {
     "provider": "服务商",
     "model": "模型",
-    "mcp": "MCP"
+    "mcp": "MCP",
+    "expert": "专家",
+    "knowledge": "知识库",
+    "skill": "技能"
   },
   "visibility": {
     "all": "全部可见",
@@ -44,7 +47,10 @@
     "noneVisibleHint": "当前为「全部不可见」，组成员不能访问此类型资源",
     "emptyProvider": "暂无服务商,请先在 AI 插件中维护服务商",
     "emptyModel": "暂无模型,请先在 AI 插件中同步或新增模型",
-    "emptyMcp": "暂无 MCP,请先在 AI 插件中维护 MCP"
+    "emptyMcp": "暂无 MCP,请先在 AI 插件中维护 MCP",
+    "emptyExpert": "暂无专家,请先在 AI Buddy 中维护专家",
+    "emptyKnowledge": "暂无知识库,请先在 AI Buddy 中维护知识库",
+    "emptySkill": "暂无技能,请先在 AI Buddy 中维护技能"
   },
   "message": {
     "selectGroupFirst": "请选择需要配置资源的分组"
