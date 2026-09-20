@@ -44,9 +44,7 @@ export interface AIGroupResult extends AIGroupCreateParams {
 }
 
 export interface AIGroupDetailResult
-  extends AIGroupResourceParams,
-    AIGroupResult {
-}
+  extends AIGroupResourceParams, AIGroupResult {}
 
 export interface AIGroupUserResult {
   id: number;
@@ -72,11 +70,15 @@ export async function getAIGroupListApi(params?: AIGroupQueryParams) {
 }
 
 export async function getUserAIGroupApi(userId: number) {
-  return requestClient.get<AIGroupResult[]>(`/api/v1/ai-groups/users/${userId}`);
+  return requestClient.get<AIGroupResult[]>(
+    `/api/v1/ai-groups/users/${userId}`,
+  );
 }
 
 export async function getAIGroupUserApi(pk: number) {
-  return requestClient.get<AIGroupUserResult[]>(`/api/v1/ai-groups/${pk}/users`);
+  return requestClient.get<AIGroupUserResult[]>(
+    `/api/v1/ai-groups/${pk}/users`,
+  );
 }
 
 export async function createAIGroupApi(data: AIGroupCreateParams) {
@@ -107,7 +109,10 @@ export async function bindAIGroupUserApi(pk: number, data: AIGroupUserParams) {
   );
 }
 
-export async function unbindAIGroupUserApi(pk: number, data: AIGroupUserParams) {
+export async function unbindAIGroupUserApi(
+  pk: number,
+  data: AIGroupUserParams,
+) {
   return requestClient.delete<AIGroupActionResult>(
     `/api/v1/ai-groups/${pk}/users`,
     { data },

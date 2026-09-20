@@ -151,7 +151,9 @@ const resourceKeywords = reactive<Record<ResourceIdsKey, string>>({
   provider_ids: '',
   skill_ids: '',
 });
-const resourceScopes = reactive<Record<ResourceIdsKey, AIGroupResourceScopeType>>({
+const resourceScopes = reactive<
+  Record<ResourceIdsKey, AIGroupResourceScopeType>
+>({
   expert_ids: 0,
   knowledge_ids: 0,
   mcp_ids: 0,
@@ -289,7 +291,6 @@ function normalizeResourceFormValues(
   };
 }
 
-
 function validateResourceForm() {
   if (!currentGroup.value?.id) {
     message.warning($t('ai-buddy-group.message.selectGroupFirst'));
@@ -375,9 +376,8 @@ function updateAllFiltered(section: ResourceSection, checked: boolean) {
 
 function getAddableCount(section: ResourceSection) {
   const selectedIds = getSectionIds(section);
-  return section.options.filter(
-    (item) => !selectedIds.includes(item.value),
-  ).length;
+  return section.options.filter((item) => !selectedIds.includes(item.value))
+    .length;
 }
 
 function isSectionOptionSelected(section: ResourceSection, value: number) {
@@ -397,7 +397,9 @@ function getUserTotalPages(response: unknown) {
 }
 
 function appendUserOptions(items: SysUserResult[]) {
-  const optionMap = new Map(userOptions.value.map((item) => [item.value, item]));
+  const optionMap = new Map(
+    userOptions.value.map((item) => [item.value, item]),
+  );
   for (const item of items) {
     optionMap.set(item.id, {
       label: item.nickname || item.username,
@@ -743,7 +745,9 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
 
                   <template v-else>
                     <div class="flex h-full min-h-0 flex-col gap-4">
-                      <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                      <div
+                        class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
+                      >
                         <a-input
                           v-model:value="resourceKeywords[section.idsKey]"
                           allow-clear
@@ -754,11 +758,15 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                             ])
                           "
                         />
-                        <div class="flex shrink-0 flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                        <div
+                          class="flex shrink-0 flex-wrap items-center gap-3 text-xs text-muted-foreground"
+                        >
                           <a-checkbox
                             :disabled="getFilteredOptions(section).length === 0"
                             :checked="isAllFilteredSelected(section)"
-                            :indeterminate="isPartiallyFilteredSelected(section)"
+                            :indeterminate="
+                              isPartiallyFilteredSelected(section)
+                            "
                             @update:checked="
                               (checked) => updateAllFiltered(section, checked)
                             "
@@ -782,7 +790,9 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                         </div>
                       </div>
 
-                      <section class="min-h-0 flex-1 overflow-hidden rounded-xl border border-border bg-muted/20">
+                      <section
+                        class="min-h-0 flex-1 overflow-hidden rounded-xl border border-border bg-muted/20"
+                      >
                         <div
                           v-if="resourcesLoading"
                           class="flex h-full min-h-[360px] items-center justify-center"
@@ -801,7 +811,9 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                           v-else-if="getFilteredOptions(section).length === 0"
                           class="flex h-full min-h-[360px] items-center justify-center"
                         >
-                          <a-empty :description="$t('ai-buddy-group.panel.noMatch')" />
+                          <a-empty
+                            :description="$t('ai-buddy-group.panel.noMatch')"
+                          />
                         </div>
 
                         <a-checkbox-group
@@ -828,7 +840,9 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
                                 "
                               >
                                 <a-checkbox :value="resource.value">
-                                  <span class="break-all text-sm text-foreground">
+                                  <span
+                                    class="break-all text-sm text-foreground"
+                                  >
                                     {{ resource.label }}
                                   </span>
                                 </a-checkbox>
@@ -864,7 +878,9 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
 
     <UserDrawer>
       <div class="box-border flex h-full min-h-0 flex-col gap-4 p-5">
-        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div
+          class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
+        >
           <a-input-search
             v-model:value="userKeyword"
             allow-clear
@@ -873,16 +889,22 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
             :placeholder="$t('ai-buddy-group.userDrawer.searchPlaceholder')"
             @search="() => loadUserOptions(true)"
           />
-          <div class="flex shrink-0 items-center gap-3 text-xs text-muted-foreground">
+          <div
+            class="flex shrink-0 items-center gap-3 text-xs text-muted-foreground"
+          >
             <span>
               {{
-                $t('ai-buddy-group.userDrawer.selected', [selectedUserIds.length])
+                $t('ai-buddy-group.userDrawer.selected', [
+                  selectedUserIds.length,
+                ])
               }}
             </span>
           </div>
         </div>
 
-        <section class="min-h-0 flex-1 overflow-hidden rounded-xl border border-border bg-muted/20">
+        <section
+          class="min-h-0 flex-1 overflow-hidden rounded-xl border border-border bg-muted/20"
+        >
           <div
             v-if="usersLoading"
             class="flex h-full min-h-[360px] items-center justify-center"
@@ -985,7 +1007,10 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
   bottom: 0;
 }
 
-.ai-group-resource-drawer .resource-config-tabs > .ant-tabs-nav > .ant-tabs-nav-wrap {
+.ai-group-resource-drawer
+  .resource-config-tabs
+  > .ant-tabs-nav
+  > .ant-tabs-nav-wrap {
   height: 100%;
 }
 
@@ -994,9 +1019,15 @@ const [UserDrawer, userDrawerApi] = useVbenDrawer({
   height: 100%;
 }
 
-.ai-group-resource-drawer .resource-config-tabs > .ant-tabs-content-holder > .ant-tabs-content,
-.ai-group-resource-drawer .resource-config-tabs > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane {
+.ai-group-resource-drawer
+  .resource-config-tabs
+  > .ant-tabs-content-holder
+  > .ant-tabs-content,
+.ai-group-resource-drawer
+  .resource-config-tabs
+  > .ant-tabs-content-holder
+  > .ant-tabs-content
+  > .ant-tabs-tabpane {
   height: 100%;
 }
-
 </style>
